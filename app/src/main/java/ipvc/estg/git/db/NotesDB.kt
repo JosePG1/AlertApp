@@ -10,7 +10,7 @@ import ipvc.estg.git.entities.PersonalNotes
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(PersonalNotes::class), version =1 , exportSchema = false)
+@Database(entities = arrayOf(PersonalNotes::class), version =2 , exportSchema = false)
 public abstract class NotesDB : RoomDatabase() {
 
     abstract fun personalNotesDao(): PersonalNotesDao
@@ -27,11 +27,9 @@ public abstract class NotesDB : RoomDatabase() {
                     var personalNotesDao = database.personalNotesDao()
 
                     // Delete all content here
-                    personalNotesDao.deleteAll()
+                   // personalNotesDao.deleteAll()
 
-                    // And sample words
-                    var notes = PersonalNotes(1, "Primeira Nota")
-                    personalNotesDao.insert(notes)
+
                 }
             }
         }

@@ -25,9 +25,13 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         allNotes = repository.allNotes
 
 
+
     }
+
+
 
     fun insert(notes: PersonalNotes) = viewModelScope.launch {
         repository.insert(notes)
     }
+
 }

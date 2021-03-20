@@ -1,5 +1,6 @@
 package ipvc.estg.git.db
 
+import android.icu.text.CaseMap
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import ipvc.estg.git.dao.PersonalNotesDao
@@ -19,4 +20,5 @@ class NotesRepository(private val personalNotesDao: PersonalNotesDao) {
     suspend fun insert(notes: PersonalNotes) {
         personalNotesDao.insert(notes)
     }
+
 }
