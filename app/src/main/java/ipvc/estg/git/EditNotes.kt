@@ -15,6 +15,7 @@ class EditNotes : AppCompatActivity() {
     lateinit var title:EditText
     lateinit var body:EditText
     var id : Int=0
+    // notas
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
