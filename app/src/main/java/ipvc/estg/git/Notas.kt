@@ -15,12 +15,13 @@ import ipvc.estg.git.adapters.NotesAdapter
 import ipvc.estg.git.entities.PersonalNotes
 import ipvc.estg.git.viewModel.NotesViewModel
 
-class Notas : AppCompatActivity() {
+class Notas : AppCompatActivity(), CellClickListener {
 
 
 
     private lateinit var notesViewModel: NotesViewModel
     private val newWordActivityRequestCode = 1
+    private lateinit var adapter: NotesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +29,7 @@ class Notas : AppCompatActivity() {
 
         // recycler view
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = NotesAdapter(this)
+        adapter = NotesAdapter(this, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -44,6 +45,15 @@ class Notas : AppCompatActivity() {
             val intent = Intent(this@Notas, AddNotas::class.java)
             startActivityForResult(intent, newWordActivityRequestCode)
         }
+    }
+
+    override fun onCellClickListener(position: Int) {
+        Toast.makeText(this,"Cell clicked", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this@Notas, EditNotes::class.java)
+        intent.putExtra("id",adapter.getNotaPosition(position).id)
+        intent.putExtra("title",adapter.getNotaPosition(position).title)
+        intent.putExtra("body",adapter.getNotaPosition(position).body)
+        startActivity(intent)
     }
 
 
@@ -66,4 +76,9 @@ class Notas : AppCompatActivity() {
 
         }
     }
+}
+
+interface CellClickListener {
+
+    fun onCellClickListener(position: Int)
 }

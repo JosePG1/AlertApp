@@ -14,6 +14,11 @@ interface   PersonalNotesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(notes: PersonalNotes)
 
+    @Query("UPDATE notes_table SET title=:title, body=:body WHERE id=:id")
+    suspend fun update(id:Int, title:String, body:String)
+
+    @Query("DELETE FROM notes_table WHERE id=:id")
+    suspend fun delete(id:Int)
 
     @Query("DELETE FROM notes_table")
     suspend fun deleteAll()

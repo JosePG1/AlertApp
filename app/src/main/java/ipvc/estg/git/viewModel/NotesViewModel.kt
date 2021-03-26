@@ -1,6 +1,7 @@
 package ipvc.estg.git.viewModel
 
 import android.app.Application
+import android.icu.text.CaseMap
 import androidx.lifecycle.*
 import ipvc.estg.git.db.NotesDB
 import ipvc.estg.git.db.NotesRepository
@@ -32,6 +33,14 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     fun insert(notes: PersonalNotes) = viewModelScope.launch {
         repository.insert(notes)
+    }
+
+    fun update(id:Int, title:String, body:String) = viewModelScope.launch {
+        repository.update(id, title, body)
+    }
+
+    fun delete(id: Int)=viewModelScope.launch(Dispatchers.IO){
+        repository.delete(id)
     }
 
 }

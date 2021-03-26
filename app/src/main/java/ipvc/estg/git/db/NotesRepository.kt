@@ -5,6 +5,7 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import ipvc.estg.git.dao.PersonalNotesDao
 import ipvc.estg.git.entities.PersonalNotes
+import java.nio.file.Files.delete
 
 class NotesRepository(private val personalNotesDao: PersonalNotesDao) {
 
@@ -19,6 +20,14 @@ class NotesRepository(private val personalNotesDao: PersonalNotesDao) {
     @WorkerThread
     suspend fun insert(notes: PersonalNotes) {
         personalNotesDao.insert(notes)
+    }
+
+    suspend fun update(id:Int, title:String, body:String){
+        personalNotesDao.update(id, title, body)
+    }
+
+    suspend fun delete(id:Int){
+        personalNotesDao.delete(id)
     }
 
 }

@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import ipvc.estg.git.CellClickListener
+import ipvc.estg.git.Notas
 import ipvc.estg.git.R
 import ipvc.estg.git.entities.PersonalNotes
 
 class  NotesAdapter internal constructor(
-    context: Context
+    context: Context,
+    private val cellClickListener: CellClickListener
 ) : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -31,6 +34,10 @@ class  NotesAdapter internal constructor(
         val current = nota[position]
         holder.titleItemView.text = current.title
         holder.noteItemView.text = current.body
+
+        holder.titleItemView.setOnClickListener {
+            cellClickListener.onCellClickListener(position)
+        }
     }
 
     internal fun setNotes(nota: List<PersonalNotes>) {
@@ -42,6 +49,12 @@ class  NotesAdapter internal constructor(
     override fun getItemCount(): Int {
        return nota.size
     }
+
+    fun getNotaPosition(position: Int): PersonalNotes{
+        return nota[position];
+    }
+
+
 
 
 }
